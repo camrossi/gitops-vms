@@ -2,7 +2,6 @@ apiVersion: pool.kubevirt.io/v1alpha1
 kind: VirtualMachinePool
 metadata:
   name: vm-pool-3710
-  namespace: cno-vms-demo
 spec:
   replicas: 3
   selector:
