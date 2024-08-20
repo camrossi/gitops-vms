@@ -20,8 +20,6 @@ spec:
           labels:
             kubevirt.io/vmpool: vm-pool-cirros
         spec:
-          nodeSelector:
-            kubernetes.io/hostname: ocp-sr-iov-bm02
           domain:
             devices:
               interfaces:
