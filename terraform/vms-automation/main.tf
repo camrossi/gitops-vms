@@ -1,4 +1,4 @@
 resource "aci_tenant" "map" {
-  for_each = var.tenants
+  for_each = toset(var.tenants)
   name                          = each.key
 }
