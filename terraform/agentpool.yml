@@ -1,0 +1,26 @@
+apiVersion: app.terraform.io/v1alpha2
+kind: AgentPool
+metadata:
+  name: agent-pool-ocp-baremetal
+spec:
+  organization: camrossi
+  token:
+    secretKeyRef:
+      name: tfc-owner
+      key: token
+  name: agent-pool-ocp-baremetal
+  agentTokens:
+    - name: agent-pool-token
+  agentDeployment:
+    replicas: 1
+    spec:
+      containers:
+        - name: tfc-agent
+          image: "hashicorp/tfc-agent:1.15.4"
+          ### The volume mont is required in OpenShift or the pods fails with permission denied when it tries to create the /.tfc-agent directory.
+          volumeMounts:
+          - mountPath: /.tfc-agent
+            name: tfc-agent
+      volumes:
+      - name: tfc-agent
+        emptyDir: {}

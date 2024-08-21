@@ -1,0 +1,18 @@
+apiVersion: app.terraform.io/v1alpha2
+kind: Module
+metadata:
+  name: aci-fab2
+spec:
+  organization: camrossi
+  token:
+    secretKeyRef:
+      name: tfc-owner
+      key: token
+  destroyOnDeletion: true
+  module:
+    source: app.terraform.io/kubernetes-operator/module-random/provider
+    version: 0.0.5
+  variables:
+  - name: tenant
+  workspace:
+    name: agent-pool-ocp-baremetal

@@ -1,0 +1,35 @@
+apiVersion: app.terraform.io/v1alpha2
+kind: Workspace
+metadata:
+  name: ocp-baremetal
+spec:
+  organization: camrossi
+  project:
+    name: fab2
+  token:
+    secretKeyRef:
+      name: tfc-owner
+      key: token
+  name: ocp-baremetal
+  description: Kubernetes Operator Automated Workspace
+  applyMethod: auto
+  terraformVersion: 1.9.5
+  terraformVariables:
+    - name: tenant
+      hcl: true
+      value: >
+        ["tf-vms-1", "tf-vms-2"]
+  environmentVariables:
+    - name: FAB_URL
+      sensitive: true
+      value: "https://192.168.68.34"
+    - name: FAB_USER
+      value: "terraform"
+    - name: FAB_PASS
+      value: ""
+    - name: CONFIRM_DESTROY
+      sensitive: false
+      value: "1"
+  executionMode: agent
+  agentPool:
+    name: agent-pool-ocp-baremetal
