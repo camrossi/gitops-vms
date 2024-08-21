@@ -1,6 +1,4 @@
 resource "aci_tenant" "map" {
-  for_each = {
-    for k, v in var.tenants : k => v
-  }
+  for_each = var.tenants
   name                          = each.key
 }
