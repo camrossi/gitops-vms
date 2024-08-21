@@ -10,9 +10,15 @@ spec:
       key: token
   destroyOnDeletion: true
   module:
-    source: app.terraform.io/kubernetes-operator/module-random/provider
-    version: 0.0.5
+    source: github.com/camrossi/gitops-vms/terraform/vms-automation
   variables:
   - name: tenant
+  - name: app
+  - name: vlans
+  - name: phys_domain
+  - name: ports
+  - name: apic
+  - name: apic_user
+  - name: apic_pass
   workspace:
-    name: agent-pool-ocp-baremetal
+    name: ocp-baremetal

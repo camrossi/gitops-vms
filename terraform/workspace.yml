@@ -16,20 +16,33 @@ spec:
   terraformVersion: 1.9.5
   terraformVariables:
     - name: tenant
+      value: "tf-vms-1"
+    - name: app
+      value: "vms"
+    - name: vlans
       hcl: true
       value: >
-        ["tf-vms-1", "tf-vms-2"]
-  environmentVariables:
-    - name: FAB_URL
+        ["3710","3711"]
+    - name: phys_domain
+      value: "uni/phys-ocp_sr_iov-secondary"
+    - name: ports
+      hcl: true
+      value: >
+        ["topology/pod-1/protpaths-201-202/pathep-[ocpbm-bm-03-bond1]",
+        "topology/pod-1/protpaths-201-202/pathep-[bm-02-bond1]"]
+    - name: apic
       sensitive: true
       value: "https://192.168.68.34"
-    - name: FAB_USER
+    - name: apic_user
       value: "terraform"
-    - name: FAB_PASS
+    - name: apic_pass
+      sensitive: true
       value: ""
+  environmentVariables:
+      # Destroy and Apply without asking for permission
     - name: CONFIRM_DESTROY
       sensitive: false
-      value: "1"
+      value: "0"
   executionMode: agent
   agentPool:
     name: agent-pool-ocp-baremetal
