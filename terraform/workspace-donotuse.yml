@@ -19,7 +19,7 @@ spec:
       value: "tf-vms-1"
     - name: app
       value: "vms"
-    - name: vlans
+    - name: vlan
       hcl: true
       value: >
         ["3710","3711"]

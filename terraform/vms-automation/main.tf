@@ -20,7 +20,7 @@ resource "aci_epg_to_domain" "phys_domain" {
 
 resource "aci_bulk_epg_to_static_path" "static_paths" {
   depends_on         = [data.aci_application_epg.vlan]
-  application_epg_dn = data.aci_application_epg.vlans.id
+  application_epg_dn = data.aci_application_epg.vlan.id
   dynamic "static_path" {
     for_each = var.ports
     content {

@@ -14,7 +14,7 @@ spec:
   variables:
   - name: tenant
   - name: app
-  - name: vlans
+  - name: vlan
   - name: phys_domain
   - name: ports
   - name: apic
