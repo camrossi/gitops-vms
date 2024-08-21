@@ -8,8 +8,8 @@ terraform {
 }
 
 provider "aci" {
-  username = apic_user
-  password = apic_pass
-  url      = apic
+  username = var.apic_user
+  password = var.apic_pass
+  url      = var.apic
   insecure = true
 }
