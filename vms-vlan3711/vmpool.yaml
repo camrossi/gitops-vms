@@ -1,0 +1,43 @@
+apiVersion: pool.kubevirt.io/v1alpha1
+kind: VirtualMachinePool
+metadata:
+  name: vm-pool-3711
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      kubevirt.io/vmpool: vm-pool-cirros
+  virtualMachineTemplate:
+    metadata:
+      creationTimestamp: null
+      labels:
+        kubevirt.io/vmpool: vm-pool-cirros
+    spec:
+      running: true
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            kubevirt.io/vmpool: vm-pool-cirros
+        spec:
+          domain:
+            devices:
+              interfaces:
+                - bridge: {}
+                  name: vlan3711
+              disks:
+              - disk:
+                  bus: virtio
+                name: containerdisk
+            resources:
+              requests:
+                memory: 128Mi
+          networks:
+            - multus:
+                networkName: vlan3711
+              name: vlan3711     
+          terminationGracePeriodSeconds: 0
+          volumes:
+          - containerDisk:
+              image: kubevirt/cirros-container-disk-demo:latest
+            name: containerdisk
