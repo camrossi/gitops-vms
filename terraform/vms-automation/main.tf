@@ -27,8 +27,8 @@ resource "aci_bulk_epg_to_static_path" "static_paths" {
   dynamic "static_path" {
     for_each = var.ports
     content {
-      encap = each.key
-      interface_dn = static_path.key
+      encap = "vlan-${each.key}"
+      interface_dn = static_path.value
       mode         = "regular"
       
     }
