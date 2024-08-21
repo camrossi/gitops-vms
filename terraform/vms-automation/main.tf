@@ -16,7 +16,7 @@ data "aci_application_epg" "vlans" {
 resource "aci_epg_to_domain" "phys_domain" {
   depends_on         = [data.aci_application_epg.vlans]
   for_each           = data.aci_application_epg.vlans
-  application_epg_dn    = data.aci_application_epg.each.vlans.id
+  application_epg_dn    = data.aci_application_epg.vlans[each.key].id
   tdn                   = var.phys_domain
 }
 
