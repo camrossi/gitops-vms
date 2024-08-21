@@ -29,7 +29,7 @@ resource "aci_bulk_epg_to_static_path" "static_paths" {
     content {
       encap = each.key
       interface_dn = static_path.key
-      mode         = "trunk"
+      mode         = "regular"
       
     }
   }
