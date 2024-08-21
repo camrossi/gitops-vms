@@ -7,23 +7,20 @@ data "aci_application_profile" "app" {
   name       = var.app
 }
 
-data "aci_application_epg" "vlans" {
-  for_each = toset(var.vlans)
+data "aci_application_epg" "vlan" {
   application_profile_dn  = data.aci_application_profile.app.id
-  name = each.key
+  name = var.vlan
 }
 
 resource "aci_epg_to_domain" "phys_domain" {
-  depends_on         = [data.aci_application_epg.vlans]
-  for_each           = data.aci_application_epg.vlans
-  application_epg_dn    = data.aci_application_epg.vlans[each.key].id
+  depends_on         = data.aci_application_epg.vlan
+  application_epg_dn    = data.aci_application_epg.vlan.id
   tdn                   = var.phys_domain
 }
 
 resource "aci_bulk_epg_to_static_path" "static_paths" {
-  depends_on         = [data.aci_application_epg.vlans]
-  for_each           = data.aci_application_epg.vlans
-  application_epg_dn = data.aci_application_epg.vlans[each.key].id
+  depends_on         = data.aci_application_epg.vlan
+  application_epg_dn = data.aci_application_epg.vlans.id
   dynamic "static_path" {
     for_each = var.ports
     content {

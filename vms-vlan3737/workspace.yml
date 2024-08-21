@@ -1,7 +1,7 @@
 apiVersion: app.terraform.io/v1alpha2
 kind: Workspace
 metadata:
-  name: ocp-baremetal
+  name: vlan3711
 spec:
   organization: camrossi
   project:
@@ -19,10 +19,8 @@ spec:
       value: "tf-vms-1"
     - name: app
       value: "vms"
-    - name: vlans
-      hcl: true
-      value: >
-        ["3710","3711"]
+    - name: vlan
+      value: 3711
     - name: phys_domain
       value: "uni/phys-ocp_sr_iov-secondary"
     - name: ports
@@ -37,7 +35,7 @@ spec:
       value: "terraform"
     - name: apic_pass
       sensitive: true
-      value: ""
+      value: "123Cisco123"
   environmentVariables:
       # Destroy and Apply without asking for permission
     - name: CONFIRM_DESTROY
