@@ -1,0 +1,69 @@
+{
+    apiVersion: 'app.terraform.io/v1alpha2',
+    kind: 'Workspace',
+    metadata: {
+      name: 'vlan' + $.vlan,
+    },
+    spec: {
+      organization: 'camrossi',
+      project: {
+        name: $.project,
+      },
+      token: {
+        secretKeyRef: {
+          name: 'tfc-owner',
+          key: 'token',
+        },
+      },
+      name: 'vlan' + $.vlan,
+      description: 'Kubernetes Operator Automated Workspace',
+      applyMethod: 'auto',
+      terraformVersion: '1.9.5',
+      terraformVariables: [
+        {
+          name: 'tenant',
+          value: $.tenant,
+        },
+        {
+          name: 'app',
+          value: $.app,
+        },
+        {
+          name: 'vlan',
+          value: std.toString($.vlan),
+        },
+        {
+          name: 'phys_domain',
+          value: $.phys_domain,
+        },
+        {
+          name: 'ports',
+          hcl: true,
+          value: std.toString($.ports) ,
+        },
+        {
+          name: 'apic_url',
+          sensitive: true,
+          value: $.apic_url,
+        },
+        {
+          name: 'apic_user',
+          value: $.apic_user,
+        },
+        {
+          name: 'apic_pass',
+          sensitive: true,
+          valueFrom: {
+            secretKeyRef: {
+              name: $.apic_pass_secret,
+              key: 'apic_pass',
+            },
+          },
+        },
+      ],
+      executionMode: 'agent',
+      agentPool: {
+        name: $.agentPool,
+      },
+    },
+  }

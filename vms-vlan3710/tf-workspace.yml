@@ -2,6 +2,8 @@ apiVersion: app.terraform.io/v1alpha2
 kind: Workspace
 metadata:
   name: vlan3710
+  annotations:
+    workspace.app.terraform.io/run-type: "apply"
 spec:
   organization: camrossi
   project:
