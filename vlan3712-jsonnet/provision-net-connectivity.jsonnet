@@ -13,7 +13,7 @@ local app = "vms";
 local phys_domain = 'uni/phys-ocp_sr_iov-secondary';
 local ports = [
   "topology/pod-1/protpaths-201-202/pathep-[ocpbm-bm-03-bond1]", 
-  #"topology/pod-1/protpaths-201-202/pathep-[bm-02-bond1]"
+  "topology/pod-1/protpaths-201-202/pathep-[bm-02-bond1]"
 ];
 local agentPool = 'agent-pool-ocp-baremetal' ;
 {
