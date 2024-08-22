@@ -2,7 +2,7 @@ local n = import 'templates/nad.jsonnet';
 local tfM = import 'templates/tf-module.jsonnet';
 local tfW = import 'templates/tf-workspace.jsonnet';
 
-local vlan = 3711;
+local vlan = 3712;
 local bridge = "br0";
 local project = 'fab2';
 local apic_url = 'https://192.168.68.34';
