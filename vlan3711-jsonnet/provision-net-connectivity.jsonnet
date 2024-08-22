@@ -1,6 +1,6 @@
-local n = import 'nad.jsonnet.TEMPLATE';
-local tfM = import 'tf-module.jsonnet.TEMPLATE';
-local tfW = import 'tf-workspace.jsonnet.TEMPLATE';
+local n = import 'templates/nad.jsonnet';
+local tfM = import 'templates/tf-module.jsonnet';
+local tfW = import 'templates/tf-workspace.jsonnet';
 
 local vlan = 3711;
 local bridge = "br0";
@@ -13,7 +13,7 @@ local app = "vms";
 local phys_domain = 'uni/phys-ocp_sr_iov-secondary';
 local ports = [
   "topology/pod-1/protpaths-201-202/pathep-[ocpbm-bm-03-bond1]", 
-#  "topology/pod-1/protpaths-201-202/pathep-[bm-02-bond1]"
+  "topology/pod-1/protpaths-201-202/pathep-[bm-02-bond1]"
 ];
 local agentPool = 'agent-pool-ocp-baremetal' ;
 {

@@ -3,6 +3,9 @@
     kind: 'Workspace',
     metadata: {
       name: 'vlan' + $.vlan,
+      "annotations": {
+        "workspace.app.terraform.io/run-type": "apply"
+      },
     },
     spec: {
       organization: 'camrossi',
@@ -22,11 +25,11 @@
       terraformVariables: [
         {
           name: 'tenant',
-          value: $.tenant,
+          value: std.toString($.tenant),
         },
         {
           name: 'app',
-          value: $.app,
+          value: std.toString($.app),
         },
         {
           name: 'vlan',
@@ -34,7 +37,7 @@
         },
         {
           name: 'phys_domain',
-          value: $.phys_domain,
+          value: std.toString($.phys_domain),
         },
         {
           name: 'ports',
@@ -44,18 +47,18 @@
         {
           name: 'apic_url',
           sensitive: true,
-          value: $.apic_url,
+          value: std.toString($.apic_url),
         },
         {
           name: 'apic_user',
-          value: $.apic_user,
+          value: std.toString($.apic_user),
         },
         {
           name: 'apic_pass',
           sensitive: true,
           valueFrom: {
             secretKeyRef: {
-              name: $.apic_pass_secret,
+              name: std.toString($.apic_pass_secret),
               key: 'apic_pass',
             },
           },
@@ -63,7 +66,7 @@
       ],
       executionMode: 'agent',
       agentPool: {
-        name: $.agentPool,
+        name: std.toString($.agentPool),
       },
     },
   }
