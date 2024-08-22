@@ -4,7 +4,8 @@
     metadata: {
       name: 'vlan' + $.vlan,
       "annotations": {
-        "workspace.app.terraform.io/run-type": "apply"
+        "workspace.app.terraform.io/run-type": "apply",
+        "workspace.app.terraform.io/run-new": "true"
       },
     },
     spec: {
