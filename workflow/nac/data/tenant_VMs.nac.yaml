@@ -27,53 +27,23 @@ apic:
               description: "br0"
               bridge_domain: 10.1.200.0_24
               physical_domains: ["ocp_sr_iov-secondary"]
-              static_ports:
-                - channel: ocpbm-bm-03-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3710
-                - channel: ocpbm-bm-02-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3710
             - name: vlan-3711
               description: "br0"
               bridge_domain: 10.1.201.0_24
               physical_domains: ["ocp_sr_iov-secondary"]
-              static_ports:
-                - channel: ocpbm-bm-03-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3711
-                - channel: ocpbm-bm-02-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3711
             - name: vlan-3712
               description: "br0"
               bridge_domain: 10.1.202.0_24
               physical_domains: ["ocp_sr_iov-secondary"]
-              static_ports:
-                - channel: ocpbm-bm-03-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3712
-                - channel: ocpbm-bm-02-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3712
         - name: vms-2
           endpoint_groups:
             - name: vlan-3713
               description: "br0"
               bridge_domain: 10.1.203.0_24
               physical_domains: ["ocp_sr_iov-secondary"]
-              static_ports:
-                - channel: ocpbm-bm-03-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3713
-                - channel: bm-02-bond1
-                  node_id: 201
-                  node2_id: 202
-                  vlan: 3713
+        - name: vms-2
+          endpoint_groups:
+            - name: vlan-3714
+              description: "br0"
+              bridge_domain: 10.1.203.0_24
+              physical_domains: ["ocp_sr_iov-secondary"]
