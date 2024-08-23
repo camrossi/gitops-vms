@@ -41,8 +41,6 @@ apic:
               description: "br0"
               bridge_domain: 10.1.203.0_24
               physical_domains: ["ocp_sr_iov-secondary"]
-        - name: vms-2
-          endpoint_groups:
             - name: vlan-3714
               description: "br0"
               bridge_domain: 10.1.203.0_24
