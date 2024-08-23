@@ -12,21 +12,21 @@ apic:
           - tenant: tf-vms-1
             application_profile: vms-1
             endpoint_group: vlan-3710
-            primary_vlan: 3710
+            vlan: 3710
           - tenant: tf-vms-1
             application_profile: vms-1
             endpoint_group: vlan-3711
-            primary_vlan: 3711
+            vlan: 3711
           - tenant: tf-vms-1
             application_profile: vms-1
             endpoint_group: vlan-3712
-            primary_vlan: 3712
+            vlan: 3712
           - tenant: tf-vms-1
             application_profile: vms-2
             endpoint_group: vlan-3713
-            primary_vlan: 3713
+            vlan: 3713
           - tenant: tf-vms-1
             application_profile: vms-2
             endpoint_group: vlan-3714
-            primary_vlan: 3714
+            vlan: 3714
 
