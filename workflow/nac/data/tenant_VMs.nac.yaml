@@ -1,0 +1,63 @@
+apic:
+  tenants:
+    - name: tf-vms-1
+      vrfs:
+        - name: vrf
+
+      bridge_domains:
+        - name: 10.1.200.0_24
+          vrf: vrf
+          subnets:
+            - ip: 10.1.200.1/24
+
+        - name: 10.1.201.0_24
+          vrf: vrf
+          subnets:
+            - ip: 10.1.201.1/24
+
+        - name: 10.1.202.0_24
+          vrf: vrf
+          subnets:
+            - ip: 10.1.202.1/24
+
+      application_profiles:
+        - name: vms-1
+          endpoint_groups:
+            - name: vlan-3710
+              description: "br0"
+              bridge_domain: 10.1.200.0_24
+              static_ports:
+                - channel: ocpbm-bm-03-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3710
+                - channel: ocpbm-bm-02-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3710
+            - name: vlan-3711
+              description: "br0"
+              bridge_domain: 10.1.201.0_24
+              static_ports:
+                - channel: ocpbm-bm-03-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3711
+                - channel: ocpbm-bm-02-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3711
+        - name: vms-2
+          endpoint_groups:
+            - name: vlan-3710
+              description: "br0"
+              bridge_domain: 10.1.202.0_24
+              static_ports:
+                - channel: ocpbm-bm-03-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3712
+                - channel: bm-02-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3712
