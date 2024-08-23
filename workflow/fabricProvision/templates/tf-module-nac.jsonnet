@@ -3,6 +3,11 @@
     kind: 'Module',
     metadata: {
       name: 'aci-module-vlan' + $.vlan,
+      "annotations": {
+        "workspace.app.terraform.io/run-type": "apply",
+        "workspace.app.terraform.io/run-new": "true",
+        "argocd.argoproj.io/sync-wave": "1"
+      },
     },
     spec: {
       organization: 'camrossi',
@@ -14,24 +19,9 @@
       },
       destroyOnDeletion: true,
       module: {
-        source: 'github.com/camrossi/gitops-vms/terraform/vms-automation',
+        source: 'github.com/camrossi/gitops-vms/terraform/nac',
       },
       variables: [
-        {
-          name: 'tenant',
-        },
-        {
-          name: 'app',
-        },
-        {
-          name: 'vlan',
-        },
-        {
-          name: 'phys_domain',
-        },
-        {
-          name: 'ports',
-        },
         {
           name: 'apic_url',
         },
@@ -43,7 +33,7 @@
         },
       ],
       workspace: {
-        name: 'vlan' +  $.vlan,
+        name: 'vlan' +  $.vlan.id,
       },
     },
   }

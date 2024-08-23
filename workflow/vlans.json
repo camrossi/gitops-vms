@@ -1,0 +1,28 @@
+[
+    {   "id": 3710,
+        "Tenant": "tf-vms-1",
+        "App": "vms",
+        "BD": {
+                "description": "from terraform",
+                "Subnet": [
+                    {
+                        
+                        "description": "subnet",
+                        "ip"         : "10.0.3.28/27",
+                        "preferred"  : "no",
+                        "scope"      : ["private"]
+                    }
+                ]     
+        }
+        
+    },
+    {
+        "name": "App3711",
+        "id": 3711
+    },
+    {
+        "name": "App3712",
+        "id": 3712
+    }
+
+]
