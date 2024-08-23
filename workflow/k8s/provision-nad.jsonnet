@@ -21,7 +21,7 @@ local nads(vlan, bridge) = [n {
       nads(epg.primary_vlan, aaep.description)
       for aaep in ap.access_policies.aaeps
           for epg in aaep.endpoint_groups
-             if epg.application_profile == "vms-2"
+            if aaep.application_profile == "std.extVar('namespace')"
     ]
   ),
 }
