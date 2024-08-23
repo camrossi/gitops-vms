@@ -18,7 +18,7 @@ local nads(vlan, bridge) = [n {
   kind: 'List',
   items: std.flattenArrays(
     [
-      nads(epg.primary_vlan, aaep.description)
+      nads(epg.vlan, aaep.description)
       for aaep in ap.access_policies.aaeps
           for epg in aaep.endpoint_groups
             if epg.application_profile == std.extVar('namespace')
