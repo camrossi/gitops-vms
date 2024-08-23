@@ -28,6 +28,8 @@ apic:
               bridge_domain: 10.1.200.0_24
               static_ports:
                 - channel: ocpbm-bm-03-bond1
+                  node_id: 203
+                  node2_id: 204
                   vlan: 200
             - name: VLAN201
               bridge_domain: 10.1.201.0_24
