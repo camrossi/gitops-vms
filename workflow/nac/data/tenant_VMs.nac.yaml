@@ -49,7 +49,7 @@ apic:
                   vlan: 3711
         - name: vms-2
           endpoint_groups:
-            - name: vlan-3710
+            - name: vlan-3712
               description: "br0"
               bridge_domain: 10.1.202.0_24
               static_ports:

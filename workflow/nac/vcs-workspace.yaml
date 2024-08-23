@@ -20,7 +20,7 @@ spec:
     repository: camrossi/gitops-vms
     branch: main
     oAuthTokenID: "ot-2Lb6LzNFuEsTcFfU"
-  workingDirectory: terraform/nac
+  workingDirectory: workflow/nac
   terraformVariables:
     - name: apic_url
       sensitive: true
