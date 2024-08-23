@@ -49,8 +49,6 @@ apic:
                   node_id: 201
                   node2_id: 202
                   vlan: 3711
-        - name: vms-2
-          endpoint_groups:
             - name: vlan-3712
               description: "br0"
               bridge_domain: 10.1.202.0_24
@@ -60,7 +58,22 @@ apic:
                   node_id: 201
                   node2_id: 202
                   vlan: 3712
-                - channel: bm-02-bond1
+                - channel: ocpbm-bm-02-bond1
                   node_id: 201
                   node2_id: 202
                   vlan: 3712
+        - name: vms-2
+          endpoint_groups:
+            - name: vlan-3713
+              description: "br0"
+              bridge_domain: 10.1.203.0_24
+              physical_domains: ["ocp_sr_iov-secondary"]
+              static_ports:
+                - channel: ocpbm-bm-03-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3713
+                - channel: bm-02-bond1
+                  node_id: 201
+                  node2_id: 202
+                  vlan: 3713
