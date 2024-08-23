@@ -26,6 +26,7 @@ apic:
             - name: vlan-3710
               description: "br0"
               bridge_domain: 10.1.200.0_24
+              physical_domains: ["ocp_sr_iov-secondary"]
               static_ports:
                 - channel: ocpbm-bm-03-bond1
                   node_id: 201
@@ -38,6 +39,7 @@ apic:
             - name: vlan-3711
               description: "br0"
               bridge_domain: 10.1.201.0_24
+              physical_domains: ["ocp_sr_iov-secondary"]
               static_ports:
                 - channel: ocpbm-bm-03-bond1
                   node_id: 201
@@ -52,6 +54,7 @@ apic:
             - name: vlan-3712
               description: "br0"
               bridge_domain: 10.1.202.0_24
+              physical_domains: ["ocp_sr_iov-secondary"]
               static_ports:
                 - channel: ocpbm-bm-03-bond1
                   node_id: 201
