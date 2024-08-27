@@ -38,7 +38,7 @@
         }
       }
     ],
-    "running": false,
+    "running": true,
     "template": {
       "metadata": {
         "annotations": {
