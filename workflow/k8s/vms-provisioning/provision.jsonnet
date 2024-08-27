@@ -1,5 +1,6 @@
 local ap = std.parseYaml(importstr '../../nac/data/access-policies.nac.yaml').apic;
-local n = import 'templates/nad.jsonnet';
+local nadt = import 'templates/nad.jsonnet';
+local vmt = import 'templates/vm.jsonnet';
 
 
 // I decided the ACI application names maps to a namespace in K8s
@@ -7,10 +8,17 @@ local n = import 'templates/nad.jsonnet';
 // Argo CD passes to jsonnet the Namespace name so we can simply deploy this across X namespaces
 // and only the rifght NAD are deployed
 
-local nads(vlan, bridge) = [n {
+local nads(vlan, bridge) = [nadt {
   vlan:: vlan,
   bridge:: bridge,
 }];
+
+local vm(vlan) = [vmt {
+  name:: "vm1-vlan" + vlan,
+  vlan:: vlan,
+  networkName:: "vlan" + vlan
+}];
+
 
 {
   apiVersion: 'v1',
@@ -21,6 +29,12 @@ local nads(vlan, bridge) = [n {
       for aaep in ap.access_policies.aaeps
           for epg in aaep.endpoint_groups
             if epg.application_profile == std.extVar('namespace')
+    ] + 
+        [
+      vm(epg.vlan)
+      for aaep in ap.access_policies.aaeps
+          for epg in aaep.endpoint_groups
+            if epg.application_profile == std.extVar('namespace')
     ]
-  ),
+  ) 
 }

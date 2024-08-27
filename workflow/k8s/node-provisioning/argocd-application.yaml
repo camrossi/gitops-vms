@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: node-interfaces-config
+spec:
+  destination:
+    name: ''
+    namespace: ''
+    server: 'https://api.ocp-sr-iov.cam.ciscolabs.com:6443'
+  source:
+    path: workflow/k8s/Node-Provisioning
+    repoURL: 'https://github.com/camrossi/gitops-vms.git'
+    targetRevision: HEAD
+    directory:
+      jsonnet:
+        extVars:
+          - name: bond
+            value: bond1
+          - name: bridge
+            value: br0
+          - name: nodeSelector
+            value: '{"kubevirt-cluster": "c1"}'
+  sources: []
+  project: default
+  targetRevision: HEAD
