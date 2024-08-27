@@ -108,7 +108,7 @@
             "multus": {
               "networkName": $.networkName
             },
-            "name": $.vlan
+            "name": std.toString($.vlan)
           }
         ],
         "terminationGracePeriodSeconds": 180,
