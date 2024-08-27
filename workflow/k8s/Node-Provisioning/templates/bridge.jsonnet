@@ -33,23 +33,7 @@
                 "name": $.bond,
                 "vlan": {
                   "mode": "trunk",
-                  "trunk-tags": [
-                    {
-                      "id": 315
-                    },
-                    {
-                      "id": 316
-                    },
-                    {
-                      "id": 317
-                    },
-                    {
-                      "id-range": {
-                        "min": 3700,
-                        "max": 3799
-                      }
-                    }
-                  ]
+                  "trunk-tags": $.trunkTags,
                 }
               }
             ]
