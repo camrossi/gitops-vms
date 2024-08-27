@@ -4,3 +4,4 @@ workflow/nac/.terraform.lock.hcl
 workflow/nac/terraform.tfstate
 workflow/nac/plan
 workflow/nac/.terraform.tfstate.lock.info
+workflow/nac/terraform.tfstate.backup

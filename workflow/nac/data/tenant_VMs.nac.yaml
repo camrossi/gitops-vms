@@ -55,7 +55,7 @@ apic:
               description: "br0"
               bridge_domain: 10.1.204.0_24
               physical_domains: ["ocp_sr_iov-secondary"]
-            #- name: vlan-3715
-            #  description: "br0"
-            #  bridge_domain: 10.1.204.0_24
-            #  physical_domains: ["ocp_sr_iov-secondary"]
+            - name: vlan-3715
+              description: "br0"
+              bridge_domain: 10.1.204.0_24
+              physical_domains: ["ocp_sr_iov-secondary"]
