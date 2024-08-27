@@ -1,0 +1,3 @@
+workflow/nac/nac.auto.tfvars
+workflow/nac/.terraform
+workflow/nac/.terraform.lock.hcl
