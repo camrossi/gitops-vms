@@ -1,6 +1,5 @@
-local ap = std.parseYaml(importstr '../nac/data/aaep.nac.yaml').apic;
+local ap = std.parseYaml(importstr '../../nac/data/access-policies.nac.yaml').apic;
 local n = import 'templates/nad.jsonnet';
-//local ns = "vms-1";
 
 
 // I decided the ACI application names maps to a namespace in K8s
@@ -18,7 +17,7 @@ local nads(vlan, bridge) = [n {
   kind: 'List',
   items: std.flattenArrays(
     [
-      nads(epg.vlan, aaep.description)
+      nads(epg.vlan, std.extVar('bridge'))
       for aaep in ap.access_policies.aaeps
           for epg in aaep.endpoint_groups
             if epg.application_profile == std.extVar('namespace')

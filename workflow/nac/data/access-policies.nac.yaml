@@ -1,8 +1,27 @@
 apic:
   access_policies:
+    vlan_pools:
+      - name: ocp_sr_iov-secondary
+        allocation: static
+        ranges:
+          - from: 3700
+            to: 3799
+          - from: 315
+            to: 315
+          - from: 316
+            to: 316
+            allocation: static
+    physical_domains:
+      - name: ocp_sr_iov-secondary
+        vlan_pool: ocp_sr_iov-secondary
+
+    routed_domains:
+      - name: ocp_sr_iov-secondary
+        vlan_pool: ocp_sr_iov-secondary
+    
     aaeps:
       - name: ocp_sr_iov_secondary_interfaces
-        description: br0
+        # The desctipion is used to encode in YAML the bond and bridge name for the OpenShift Nodes
         physical_domains:
           - ocp_sr_iov-secondary
           - phys
