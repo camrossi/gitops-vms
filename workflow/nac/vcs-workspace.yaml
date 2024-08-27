@@ -19,7 +19,7 @@ spec:
   versionControl:
     repository: camrossi/gitops-vms
     branch: main
-    oAuthTokenID: "xxxxxxx"
+    oAuthTokenID: "xxxxxxxx"
   workingDirectory: workflow/nac
   terraformVariables:
     - name: apic_url
