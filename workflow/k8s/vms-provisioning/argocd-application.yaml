@@ -8,7 +8,7 @@ spec:
     namespace: 'vms-2'
     server: 'https://api.ocp-sr-iov.cam.ciscolabs.com:6443'
   source:
-    path: workflow/k8s/nad-provisioning
+    path: workflow/k8s/vms-provisioning
     repoURL: 'https://github.com/camrossi/gitops-vms.git'
     targetRevision: HEAD
     directory:

@@ -3,14 +3,14 @@
   "kind": "VirtualMachine",
   "metadata": {
     "labels": {
-      "app": "$.name",
+      "app": "vm-vlan-" + $.name,
       "kubevirt.io/dynamic-credentials-support": "true",
       "vm.kubevirt.io/template": "rhel9-server-small",
       "vm.kubevirt.io/template.namespace": "openshift",
       "vm.kubevirt.io/template.revision": "1",
       "vm.kubevirt.io/template.version": "v0.29.1"
     },
-    "name": $.name,
+    "name": "vm-vlan-" + $.name,
     "namespace": std.extVar('namespace')
   },
   "spec": {
@@ -20,7 +20,7 @@
         "kind": "DataVolume",
         "metadata": {
           "creationTimestamp": null,
-          "name": $.name
+          "name": "vm-vlan-" + $.name
         },
         "spec": {
           "sourceRef": {
@@ -48,7 +48,7 @@
         },
         "creationTimestamp": null,
         "labels": {
-          "kubevirt.io/domain": $.name,
+          "kubevirt.io/domain": "vm-vlan-" + $.name,
           "kubevirt.io/size": "small"
         }
       },
@@ -115,7 +115,7 @@
         "volumes": [
           {
             "dataVolume": {
-              "name": $.name
+              "name": "vm-vlan-" + $.name
             },
             "name": "rootdisk"
           },
