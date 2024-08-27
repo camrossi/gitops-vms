@@ -11,22 +11,22 @@ local bridge(bond, bridge, nodeSelector, trunkTags) = [n {
   bond:: bond,
   bridge:: bridge,
   nodeSelector:: nodeSelector,
-  trunkTags:: trunkTags
+  trunkTags:: trunkTags,
 }];
-local trunkTags = 
-[ 
-  if range.from == range.to then {"id": range.from}
-  else {"id-range":
+local trunkTags =
+  [
+    if range.from == range.to then { id: range.from }
+    else {
+      'id-range':
         {
-          "min": range.from,
-          "max": range.to
-        }
-  }
-  for vlan_pool in ap.access_policies.vlan_pools
+          min: range.from,
+          max: range.to,
+        },
+    }
+    for vlan_pool in ap.access_policies.vlan_pools
     for range in vlan_pool.ranges
-      
-];
+
+  ];
 
 
 bridge(std.extVar('bond'), std.extVar('bridge'), std.extVar('nodeSelector'), trunkTags)
-

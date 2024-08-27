@@ -5,7 +5,7 @@
     "name": $.bond + "-" + $.bridge
   },
   "spec": {
-    "nodeSelector": $.nodeSelector,
+    "nodeSelector": std.parseYaml($.nodeSelector),
     "desiredState": {
       "interfaces": [
         {
