@@ -26,7 +26,7 @@ epgs:
     #    type: consumer
     domains:
       - type: phys
-        domain: phys
+        domain: rpis-c1
 
   - name: vlan-3802
     bd: 192.168.22.0_24_bd
@@ -42,7 +42,7 @@ epgs:
     #    type: consumer
     domains:
       - type: phys
-        domain: phys
+        domain: rpis-c1
     #ports:
     #  - interface: vpc_iac
     #    type: vpc
@@ -122,21 +122,3 @@ epgs:
 #      - icmp
 #
 
-aaeps:
-  - name: rpis
-    aep_to_domain:
-      - domain: phys
-        type: phys
-      - domain: ocp_sr_iov-secondary
-        type: phys
-      - domain: ocp_sr_iov-secondary
-        type: l3dom
-    aci_aep_to_epg:
-      - tenant: rpi_vms
-        ap: vms-1
-        epg: vlan-3801
-        encap: vlan-3801
-      - tenant: rpi_vms
-        ap: vms-1
-        epg: vlan-3802
-        encap: vlan-3802

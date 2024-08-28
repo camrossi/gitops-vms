@@ -55,7 +55,7 @@
         scope: "{{ item.scope }}"
       loop: "{{ bridge_domains }}"
       when: item.mode == 'L3'
-      
+
     - name: Add Application Profile
       cisco.aci.aci_ap:
         <<: *aci_login
@@ -71,6 +71,17 @@
         bd: "{{ item.bd }}"
         preferred_group: "{{ item.prefGroup }}"
       loop: "{{ epgs }}"
+
+    - name: Add domain binding
+      cisco.aci.aci_epg_to_domain:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        ap: "{{ app_name }}"
+        epg: "{{ item.0.name }}"
+        domain: "{{ item.1.domain }}"
+        domain_type: "{{ item.1.type }}"
+        vm_provider: "{{ item.1.provider | default(omit) }}"
+      loop: "{{ epgs | subelements('domains', skip_missing=True) }}"
 
     # Contract Definition
 
