@@ -4,7 +4,7 @@ metadata:
   name: ocp-sr-iov-bm02-bond1
 spec:
   nodeSelector: 
-    kubernetes.io/hostname: "ocp-sr-iov-bm02.ocp-sr-iov.cam.ciscolabs.com" 
+    kubernetes.io/hostname: "ocp-sr-iov-bm02" 
   desiredState:
     interfaces:
       - name: bond1
