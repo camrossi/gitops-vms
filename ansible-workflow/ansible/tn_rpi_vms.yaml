@@ -55,7 +55,22 @@
         scope: "{{ item.scope }}"
       loop: "{{ bridge_domains }}"
       when: item.mode == 'L3'
+      
+    - name: Add Application Profile
+      cisco.aci.aci_ap:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        ap: "{{ app_name }}"
 
+    - name: Add EPG
+      cisco.aci.aci_epg:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        ap: "{{ app_name }}"
+        epg: "{{ item.name }}"
+        bd: "{{ item.bd }}"
+        preferred_group: "{{ item.prefGroup }}"
+      loop: "{{ epgs }}"
 
     # Contract Definition
 
