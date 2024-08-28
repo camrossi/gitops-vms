@@ -18,7 +18,7 @@
       state: present
 
   vars_files:
-    - ./tn_prod_vars.yaml
+    - ./tn_rpi_vms_vars.yaml
 
   tasks:
     - name: Add Tenant
