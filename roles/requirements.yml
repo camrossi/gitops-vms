@@ -1,1 +1,3 @@
-cisco.aci
+---
+collections:
+  - cisco.aci
