@@ -32,9 +32,9 @@ local vm(vlan) = [vmt {
     ] + 
       [
       vm(epg.vlan)
-      for aaep in ap.access_policies.aaeps
-          for epg in aaep.endpoint_groups
-            if epg.application_profile == std.extVar('namespace')
+      for aaep in ap.aaeps
+          for epg in aaep.aci_aep_to_epg
+            if epg.app_name == std.extVar('namespace')
       ]
   ) 
 }
