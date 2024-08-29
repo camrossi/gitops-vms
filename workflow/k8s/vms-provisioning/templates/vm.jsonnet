@@ -129,7 +129,7 @@
           },
           {
             "cloudInitNoCloud": {
-              "userData": "user: cloud-user\npassword: 123Cisco123\nchpasswd: { expire: False }\nssh_authorized_keys:\n  - ssh-rsa " + $.sshKey"
+              "userData": "user: cloud-user\npassword: 123Cisco123\nchpasswd: { expire: False }\nssh_authorized_keys:\n  - ssh-rsa " + $.sshKey
             },
             "name": "cloudinitdisk"
           }
