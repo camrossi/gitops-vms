@@ -1,6 +1,6 @@
 {
   "apiVersion": "kubevirt.io/v1",
-  "kind": "VirtualMachineInstance",
+  "kind": "VirtualMachine",
   "metadata": {
     "name": $.name,
     "labels": {
