@@ -129,7 +129,7 @@
           },
           {
             "cloudInitNoCloud": {
-              "userData": "user: cloud-user\npassword: 123Cisco123\nchpasswd: { expire: False }"
+              "userData": "#cloud-config\nuser: cloud-user\npassword: 123Cisco123\nchpasswd: { expire: False }"
             },
             "name": "cloudinitdisk"
           }
