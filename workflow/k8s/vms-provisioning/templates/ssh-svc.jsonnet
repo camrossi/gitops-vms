@@ -20,7 +20,7 @@
             }
         ],
         "selector": {
-            "kubevirt.io/vm": $.name
+            "kubevirt.io/domain": $.name
         },
         "sessionAffinity": "None",
         "type": "NodePort"
