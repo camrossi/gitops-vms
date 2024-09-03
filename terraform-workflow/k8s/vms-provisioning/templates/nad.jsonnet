@@ -12,7 +12,7 @@
           plugins: [
             {
               bridge: $.bridge,
-              type: 'cnv-bridge',
+              type: 'bridge',
               vlan: $.vlan,
             },
           ],
