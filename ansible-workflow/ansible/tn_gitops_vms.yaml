@@ -92,53 +92,62 @@
         vm_provider: "{{ item.1.provider | default(omit) }}"
       loop: "{{ endpoint_groups | subelements('domains', skip_missing=True) }}"
 
-    # Contract Definition
+#Contract Definition
 
-#    - name: Add filters
-#      cisco.aci.aci_filter:
-#        <<: *aci_login
-#        tenant: "{{ tenant_name }}"
-#        filter: "{{ item.name }}"
-#      loop: "{{ filters }}"
-#
-#    - name: Create a filter entry
-#      cisco.aci.aci_filter_entry:
-#        <<: *aci_login
-#        tenant: "{{ tenant_name }}"
-#        entry: "{{ item.name }}"
-#        filter: "{{ item.name }}"
-#        ether_type: "{{ item.ether_type  }}"
-#        ip_protocol: "{{ item.ip_protocol }}"
-#        dst_port_start: "{{ item.dst_port_start | default(omit) }}"
-#        dst_port_end: "{{ item.dst_port_end | default(omit) }}"
-#      loop: "{{ filters }}"
-#
+    - name: Add filters
+      cisco.aci.aci_filter:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        filter: "{{ item.name }}"
+      loop: "{{ filters }}"
 
-#    - name: Add contracts
-#      cisco.aci.aci_contract:
-#        <<: *aci_login
-#        tenant: "{{ tenant_name }}"
-#        contract: "{{ item.name }}"
-#        description: "{{ item.descr }}"
-#        scope: "{{ item.scope }}"
-#      loop: "{{ contracts }}"
-#
-#    - name: Add contract subjects
-#      cisco.aci.aci_contract_subject:
-#        <<: *aci_login
-#        tenant: "{{ tenant_name }}"
-#        contract: "{{ item.name }}"
-#        subject: "{{ item.subject }}"
-#        reverse_filter: "{{ item.reverse_filter }}"
-#      loop: "{{ contracts }}"
-#
-#    - name: Bind filters to contract subjects
-#      cisco.aci.aci_contract_subject_to_filter:
-#        <<: *aci_login
-#        tenant: "{{ tenant_name }}"
-#        contract: "{{ item.0.name }}"
-#        subject: "{{ item.0.subject }}"
-#        filter: "{{ item.1 }}"
-#        log: log
-#      loop: "{{ contracts | subelements('filters') }}"
-#
+    - name: Create a filter entry
+      cisco.aci.aci_filter_entry:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        entry: "{{ item.name }}"
+        filter: "{{ item.name }}"
+        ether_type: "{{ item.ether_type  }}"
+        ip_protocol: "{{ item.ip_protocol }}"
+        dst_port_start: "{{ item.dst_port_start | default(omit) }}"
+        dst_port_end: "{{ item.dst_port_end | default(omit) }}"
+      loop: "{{ filters }}"
+
+    - name: Add contracts
+      cisco.aci.aci_contract:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        contract: "{{ item.name }}"
+        description: "{{ item.descr }}"
+        scope: "{{ item.scope }}"
+      loop: "{{ contracts }}"
+
+    - name: Add contract subjects
+      cisco.aci.aci_contract_subject:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        contract: "{{ item.name }}"
+        subject: "{{ item.subject }}"
+        reverse_filter: "{{ item.reverse_filter }}"
+      loop: "{{ contracts }}"
+
+    - name: Bind filters to contract subjects
+      cisco.aci.aci_contract_subject_to_filter:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        contract: "{{ item.0.name }}"
+        subject: "{{ item.0.subject }}"
+        filter: "{{ item.1 }}"
+        log: log
+      loop: "{{ contracts | subelements('filters') }}"
+
+    - name: Add contracts
+      cisco.aci.aci_epg_to_contract:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        ap: "{{ item.0.ap }}"
+        epg: "{{ item.0.name }}"
+        contract: "{{ item.1.contract }}"
+        contract_type: "{{ item.1.type }}"
+
+      loop: "{{ endpoint_groups | subelements('contracts', skip_missing=True) }}"

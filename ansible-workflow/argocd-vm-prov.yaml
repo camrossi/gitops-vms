@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vms-2
+  name: vms-1
 spec:
   destination:
     name: ''
-    namespace: 'vms-2'
+    namespace: 'vms-1'
     server: 'https://api.ocp-sr-iov.cam.ciscolabs.com:6443'
   source:
     path: ansible-workflow/k8s/vms-provisioning

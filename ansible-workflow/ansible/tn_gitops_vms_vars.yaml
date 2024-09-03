@@ -34,6 +34,10 @@ endpoint_groups:
   - name: vlan-3710
     ap: vms-1
     bd: 10.1.200.0_24
+    contracts:
+      - contract: icmp
+        type: provider
+
     domains:
       - type: phys
         domain: ocp_sr_iov-secondary
@@ -48,6 +52,9 @@ endpoint_groups:
   - name: vlan-3712
     ap: vms-2
     bd: 10.1.202.0_24
+    contracts:
+      - contract: icmp
+        type: consumer
     domains:
       - type: phys
         domain: ocp_sr_iov-secondary
@@ -59,73 +66,17 @@ endpoint_groups:
       - type: phys
         domain: ocp_sr_iov-secondary
 
-#filters:
-#  - name: https
-#    ether_type: ip
-#    ip_protocol: tcp
-#    dst_port_start: 443
-#    dst_port_end: 443
-#  - name: dns
-#    ether_type: ip
-#    ip_protocol: udp
-#    dst_port_start: 53
-#    dst_port_end: 53
-#  - name: icmp
-#    ether_type: ip
-#    ip_protocol: icmp
-#  - name: mariadb
-#    ether_type: ip
-#    ip_protocol: tcp
-#    dst_port_start: 3306
-#    dst_port_end: 3306
-#
-#contracts:
-#  - name: web_to_app_con
-#    descr: Communication between web servers and application backend
-#    scope: application-profile
-#    subject: https_icmp
-#    reverse_filter: yes
-#    filters:
-#      - https
-#      - icmp
-#  - name: app_to_db_con
-#    descr: Communication between application backend and databases
-#    scope: application-profile
-#    subject: mariadb_icmp
-#    reverse_filter: yes
-#    filters:
-#      - mariadb
-#      - icmp
-#  - name: any_to_log_con
-#    descr: Communication between any component and log
-#    scope: application-profile
-#    subject: https
-#    reverse_filter: yes
-#    filters:
-#      - https
-#  - name: any_to_dns_con
-#    descr: Communication between any component and dns
-#    scope: application-profile
-#    subject: dns_icmp
-#    reverse_filter: yes
-#    filters:
-#      - dns
-#      - icmp
-#  - name: app_to_auth_con
-#    descr: Communication between application backend and authentication services
-#    scope: application-profile
-#    subject: https_icmp
-#    reverse_filter: yes
-#    filters:
-#      - https
-#      - icmp
-#  - name: cache_to_db_con
-#    descr: Communication between application backend and database cache
-#    scope: application-profile
-#    subject: mariadb_icmp
-#    reverse_filter: yes
-#    filters:
-#      - mariadb
-#      - icmp
-#
+filters:
+  - name: icmp
+    ether_type: ip
+    ip_protocol: icmp
+
+contracts:
+  - name: icmp
+    descr: permit icmp
+    scope: tenant
+    subject: icmp
+    reverse_filter: yes
+    filters:
+      - icmp
 
