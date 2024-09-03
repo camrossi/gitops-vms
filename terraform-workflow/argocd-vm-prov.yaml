@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vms-2
+spec:
+  destination:
+    name: ''
+    namespace: 'vms-2'
+    server: 'https://192.168.11.252:6443'
+  source:
+    path: terraform-workflow/k8s/vms-provisioning
+    repoURL: 'https://github.com/camrossi/gitops-vms.git'
+    targetRevision: HEAD
+    directory:
+      jsonnet:
+        extVars:
+          - name: namespace
+            value: $ARGOCD_APP_NAMESPACE
+          - name: bridge
+            value: br0
+
+  sources: []
+  project: default
+  targetRevision: HEAD
