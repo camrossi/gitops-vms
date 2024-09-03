@@ -55,6 +55,15 @@
         scope: "{{ item.scope }}"
       loop: "{{ bridge_domains }}"
       when: item.mode == 'L3'
+    
+    - name: Add DHCP Relay
+      cisco.aci.aci_bd_dhcp_label:
+        <<: *aci_login
+        tenant: "{{ tenant_name }}"
+        bd: "{{ item.name }}"
+        dhcp_label: "{{ item.dhcp_label }}"
+        scope: infra
+      loop: "{{ bridge_domains }}"
 
     - name: Add Application Profile
       cisco.aci.aci_ap:

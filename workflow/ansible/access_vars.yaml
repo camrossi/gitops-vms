@@ -39,21 +39,13 @@ aaeps:
         endpoint_group: vlan-3711
         vlan: 3711
       - tenant: gitops-ansible-vms-1
-        application_profile: vms-1
+        application_profile: vms-2
         endpoint_group: vlan-3712
         vlan: 3712
       - tenant: gitops-ansible-vms-1
         application_profile: vms-2
         endpoint_group: vlan-3713
         vlan: 3713
-      - tenant: gitops-ansible-vms-1
-        application_profile: vms-2
-        endpoint_group: vlan-3714
-        vlan: 3714
-      - tenant: gitops-ansible-vms-1
-        application_profile: vms-2
-        endpoint_group: vlan-3715
-        vlan: 3715
 
 
 

@@ -1,35 +1,29 @@
 tenant_name: gitops-ansible-vms-1
-vrf_name: vrf
+vrf_name: default
 
 bridge_domains:
   - name: 10.1.200.0_24
     mode: L3
+    dhcp_label: bm-01-dhcp-relay
     gateway: 10.1.200.1/24
     scope: [private]
 
   - name: 10.1.201.0_24
     mode: L3
+    dhcp_label: bm-01-dhcp-relay
     gateway: 10.1.201.1/24
     scope: [private]
 
   - name: 10.1.202.0_24
     mode: L3
+    dhcp_label: bm-01-dhcp-relay
     gateway: 10.1.202.1/24
     scope: [private]
 
   - name: 10.1.203.0_24
     mode: L3
+    dhcp_label: bm-01-dhcp-relay
     gateway: 10.1.203.1/24
-    scope: [private]
-
-  - name: 10.1.204.0_24
-    mode: L3
-    gateway: 10.1.204.1/24
-    scope: [private]
-
-  - name: 10.1.205.0_24
-    mode: L3
-    gateway: 10.1.205.1/24
     scope: [private]
 
 application_profiles:
@@ -52,7 +46,7 @@ endpoint_groups:
         domain: ocp_sr_iov-secondary
 
   - name: vlan-3712
-    ap: vms-1
+    ap: vms-2
     bd: 10.1.202.0_24
     domains:
       - type: phys
@@ -65,19 +59,6 @@ endpoint_groups:
       - type: phys
         domain: ocp_sr_iov-secondary
 
-  - name: vlan-3714
-    ap: vms-2
-    bd: 10.1.204.0_24
-    domains:
-      - type: phys
-        domain: ocp_sr_iov-secondary
-
-  - name: vlan-3715
-    ap: vms-2
-    bd: 10.1.205.0_24
-    domains:
-      - type: phys
-        domain: ocp_sr_iov-secondary
 #filters:
 #  - name: https
 #    ether_type: ip

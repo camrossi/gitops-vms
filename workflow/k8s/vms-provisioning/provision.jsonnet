@@ -9,9 +9,11 @@ local sshKey = "AAAAB3NzaC1yc2EAAAADAQABAAABAQC+7s7Pc1s+8BpEGpygHuRzssjiHMyFwbhZ
 // Argo CD passes to jsonnet the Namespace name so we can simply deploy this across X namespaces
 // and only the rifght NAD are deployed
 
-local nads(vlan, bridge) = [nadt {
+local nads(vlan, bridge, subnet) = [nadt {
   vlan:: vlan,
   bridge:: bridge,
+  range:: range,
+  gateway:: gateway
 }];
 
 local vm(vlan) = [vmt {
