@@ -77,10 +77,6 @@
             ],
             "interfaces": [
               {
-                "masquerade": {},
-                "name": "default"
-              },
-              {
                 "bridge": {},
                 "model": "virtio",
                 "name": std.toString($.vlan)
@@ -108,10 +104,6 @@
           "resources": {}
         },
         "networks": [
-           {
-            "name": "default",
-            "pod": {}
-          },
           {
             "multus": {
               "networkName": $.networkName
