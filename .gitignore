@@ -1,8 +1,8 @@
-workflow/nac/nac.auto.tfvars
-workflow/nac/.terraform
-workflow/nac/.terraform.lock.hcl
-workflow/nac/terraform.tfstate
-workflow/nac/plan
-workflow/nac/.terraform.tfstate.lock.info
-workflow/nac/terraform.tfstate.backup
+terraform-workflow/nac/nac.auto.tfvars
+terraform-workflow/nac/.terraform
+terraform-workflow/nac/.terraform.lock.hcl
+terraform-workflow/nac/terraform.tfstate
+terraform-workflow/nac/plan
+terraform-workflow/nac/.terraform.tfstate.lock.info
+terraform-workflow/nac/terraform.tfstate.backup
 ansible-workflow/ansible/inventory.yaml
