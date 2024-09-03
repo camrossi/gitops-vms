@@ -1,0 +1,25 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ocp-sr-iov-bm03-bond1
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: "ocp-sr-iov-bm03.ocp-sr-iov.cam.ciscolabs.com" 
+  desiredState:
+    interfaces:
+      - name: bond1
+        description: bond1 for br1
+        type: bond
+        lldp:
+          enabled: true
+        state: up
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        link-aggregation:
+          mode: 802.3ad
+          port:
+          - ens1f2
+          - ens3f1
+        mtu: 9000

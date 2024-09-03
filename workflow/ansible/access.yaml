@@ -1,0 +1,84 @@
+# ACI playbook - Create Tenant prod including networking and contracts
+---
+
+- name: Create Access Infra
+  hosts: fab2
+  connection: local
+  gather_facts: no
+
+  vars:
+    aci_login: &aci_login
+      host: "{{ ansible_host }}"
+      username: "{{ aci_username }}"
+      password: "{{ aci_password | default(omit) }}"
+      private_key: "{{ aci_private_key | default(omit) }}"
+      certificate_name: "{{ aci_certificate_name | default(omit) }}"
+      validate_certs: "{{ aci_validate_certs }}"
+      annotation: "orchestrator:ansible"
+      state: present
+
+  vars_files:
+    - ./access_vars.yaml
+
+  tasks:
+    - name: Add a new physical domain
+      cisco.aci.aci_domain:
+        <<: *aci_login
+        domain: "{{ item.name }}"
+        domain_type: "{{ item.type }}"
+        state: present
+      loop: "{{ physical_domains }}"
+
+    - name: Add a new VLAN pool
+      cisco.aci.aci_vlan_pool:
+        <<: *aci_login
+        pool: "{{ item.name }}"
+        pool_allocation_mode: "{{ item.allocation }}"
+        description: Production VLANs
+      loop: "{{ vlan_pools }}"
+
+    - name: Add a new VLAN pool range
+      cisco.aci.aci_encap_pool_range:
+        <<: *aci_login
+        pool: "{{item.0.name }}"
+        pool_type: vlan
+        pool_allocation_mode: "{{ item.1.allocation }}"
+        range_start: "{{ item.1.from }}"
+        range_end: "{{ item.1.to }}"
+      loop: "{{ vlan_pools | subelements('ranges', skip_missing=True) }}"
+    
+    - name: Add domain to VLAN pool binding
+      cisco.aci.aci_domain_to_encap_pool:
+        <<: *aci_login
+        domain: "{{ item.name }}"
+        domain_type: "{{ item.type }}"
+        pool: "{{ item.vlan_pool }}"
+        pool_type: vlan
+        pool_allocation_mode: "{{ item.allocation }}"
+      loop: "{{ physical_domains }}"
+
+    - name: Add a new AAEP domain
+      cisco.aci.aci_aep:
+        <<: *aci_login
+        aep: "{{ item.name }}"
+        infra_vlan: false
+      loop: "{{ aaeps }}"
+
+    - name: Add AAEP domain binding
+      cisco.aci.aci_aep_to_domain:
+        <<: *aci_login
+        aep: "{{item.0.name }}"
+        domain: "{{ item.1.domain }}"
+        domain_type: "{{ item.1.type }}"
+      loop: "{{ aaeps | subelements('aep_to_domain', skip_missing=True) }}"
+
+    - name: Deploy Static Path binding
+      cisco.aci.aci_aep_to_epg:
+        <<: *aci_login
+        aep: "{{ item.0.name  }}"
+        tenant: "{{ item.1.tenant }}"
+        ap: "{{ item.1.application_profile }}"
+        epg: "{{ item.1.endpoint_group }}"
+        vlan: "{{ item.1.vlan }}"
+        interface_mode: 802.1p
+      loop: "{{ aaeps | subelements('aci_aep_to_epg', skip_missing=True) }}"

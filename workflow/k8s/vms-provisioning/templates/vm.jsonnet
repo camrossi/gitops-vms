@@ -3,70 +3,27 @@
   "kind": "VirtualMachine",
   "metadata": {
     "labels": {
-      "app": $.name,
-      "kubevirt.io/dynamic-credentials-support": "true",
-      "vm.kubevirt.io/template": "rhel9-server-small",
-      "vm.kubevirt.io/template.namespace": "openshift",
-      "vm.kubevirt.io/template.revision": "1",
-      "vm.kubevirt.io/template.version": "v0.29.1"
+      "name": $.name
     },
-    "name": $.name,
-    "namespace": std.extVar('namespace')
+    "name": $.name
   },
   "spec": {
-    "dataVolumeTemplates": [
-      {
-        "apiVersion": "cdi.kubevirt.io/v1beta1",
-        "kind": "DataVolume",
-        "metadata": {
-          "creationTimestamp": null,
-          "name": $.name
-        },
-        "spec": {
-          "sourceRef": {
-            "kind": "DataSource",
-            "name": "rhel9",
-            "namespace": "openshift-virtualization-os-images"
-          },
-          "storage": {
-            "resources": {
-              "requests": {
-                "storage": "30Gi"
-              }
-            }
-          }
-        }
-      }
-    ],
     "running": true,
     "template": {
       "metadata": {
-        "annotations": {
-          "vm.kubevirt.io/flavor": "small",
-          "vm.kubevirt.io/os": "rhel9",
-          "vm.kubevirt.io/workload": "server"
-        },
-        "creationTimestamp": null,
         "labels": {
-          "kubevirt.io/domain": $.name,
-          "kubevirt.io/size": "small"
+          "kubevirt.io/vm": $.name
         }
       },
       "spec": {
-        "architecture": "amd64",
         "domain": {
-          "cpu": {
-            "cores": 1,
-            "sockets": 1,
-            "threads": 1
-          },
           "devices": {
             "disks": [
               {
                 "disk": {
                   "bus": "virtio"
                 },
-                "name": "rootdisk"
+                "name": "containerdisk"
               },
               {
                 "disk": {
@@ -82,33 +39,18 @@
               },
               {
                 "bridge": {},
-                "model": "virtio",
-                "name": std.toString($.vlan)
+                "name": std.toString($.vlan),
               }
-            ],
-            "rng": {}
+            ]
           },
-          "features": {
-            "acpi": {},
-            "smm": {
-              "enabled": true
+          "resources": {
+            "requests": {
+              "memory": "256M"
             }
-          },
-          "firmware": {
-            "bootloader": {
-              "efi": {}
-            }
-          },
-          "machine": {
-            "type": "pc-q35-rhel9.4.0"
-          },
-          "memory": {
-            "guest": "2Gi"
-          },
-          "resources": {}
+          }
         },
         "networks": [
-           {
+          {
             "name": "default",
             "pod": {}
           },
@@ -116,20 +58,19 @@
             "multus": {
               "networkName": $.networkName
             },
-            "name": std.toString($.vlan)
+            "name": std.toString($.vlan),
           }
         ],
-        "terminationGracePeriodSeconds": 180,
         "volumes": [
           {
-            "dataVolume": {
-              "name": $.name
+            "containerDisk": {
+              "image": "quay.io/camillo/alpine:cloudinit"
             },
-            "name": "rootdisk"
+            "name": "containerdisk"
           },
           {
             "cloudInitNoCloud": {
-              "userData": "#cloud-config\nuser: cloud-user\npassword: 123Cisco123\nchpasswd: { expire: False }\nssh_authorized_keys:\n  - ssh-rsa " + $.sshKey
+              "userData": "#cloud-config\nssh_authorized_keys:\n  - ssh-rsa " + $.sshKey
             },
             "name": "cloudinitdisk"
           }

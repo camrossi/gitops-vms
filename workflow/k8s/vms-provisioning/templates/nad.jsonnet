@@ -3,9 +3,9 @@
   "kind": "NetworkAttachmentDefinition",
   "metadata": {
     "name": "vlan" + $.vlan,
-    "annotations": {
-      "k8s.v1.cni.cncf.io/resourceName": "bridge.network.kubevirt.io/" + $.bridge
-    }
+    #"annotations": {
+    #  "k8s.v1.cni.cncf.io/resourceName": "bridge.network.kubevirt.io/" + $.bridge
+    #}
   },
   spec: {
       config: std.manifestJson(
@@ -15,7 +15,7 @@
           plugins: [
             {
               bridge: $.bridge,
-              type: 'cnv-bridge',
+              type: 'bridge',
               vlan: $.vlan,
             },
           ],

@@ -1,4 +1,4 @@
-local ap = std.parseYaml(importstr '../../nac/data/access-policies.nac.yaml').apic;
+local ap = std.parseYaml(importstr '../../ansible/access_vars.yaml');
 local n = import 'templates/bridge.jsonnet';
 
 
@@ -23,7 +23,7 @@ local trunkTags =
           max: range.to,
         },
     }
-    for vlan_pool in ap.access_policies.vlan_pools
+    for vlan_pool in ap.vlan_pools
     for range in vlan_pool.ranges
 
   ];

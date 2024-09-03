@@ -1,0 +1,59 @@
+physical_domains:
+  - name: ocp_sr_iov-secondary
+    type: phys
+    vlan_pool: ocp_sr_iov-secondary
+    allocation: static
+  - name: ocp_sr_iov-secondary
+    type: l3dom
+    vlan_pool: ocp_sr_iov-secondary
+    allocation: static
+vlan_pools:
+  - name: ocp_sr_iov-secondary
+    allocation: static
+    ranges:
+      - from: 3700
+        to: 3799
+        allocation: static
+      - from: 315
+        to: 315
+        allocation: static
+      - from: 316
+        to: 316
+        allocation: static
+aaeps:
+  - name: ocp_sr_iov_secondary_interfaces
+    aep_to_domain:
+      - domain: ocp_sr_iov-secondary
+        type: phys
+      - domain: phys
+        type: phys
+      - domain: ocp_sr_iov-secondary
+        type: l3dom
+    aci_aep_to_epg:
+      - tenant: gitops-ansible-vms-1
+        application_profile: vms-1
+        endpoint_group: vlan-3710
+        vlan: 3710
+      - tenant: gitops-ansible-vms-1
+        application_profile: vms-1
+        endpoint_group: vlan-3711
+        vlan: 3711
+      - tenant: gitops-ansible-vms-1
+        application_profile: vms-1
+        endpoint_group: vlan-3712
+        vlan: 3712
+      - tenant: gitops-ansible-vms-1
+        application_profile: vms-2
+        endpoint_group: vlan-3713
+        vlan: 3713
+      - tenant: gitops-ansible-vms-1
+        application_profile: vms-2
+        endpoint_group: vlan-3714
+        vlan: 3714
+      - tenant: gitops-ansible-vms-1
+        application_profile: vms-2
+        endpoint_group: vlan-3715
+        vlan: 3715
+
+
+

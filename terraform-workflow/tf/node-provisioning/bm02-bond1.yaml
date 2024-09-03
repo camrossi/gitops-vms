@@ -1,0 +1,25 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ocp-sr-iov-bm02-bond1
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: "ocp-sr-iov-bm02" 
+  desiredState:
+    interfaces:
+      - name: bond1
+        description: bond1 for br1
+        type: bond
+        lldp:
+          enabled: true
+        state: up
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        link-aggregation:
+          mode: 802.3ad
+          port:
+          - enp216s0f0
+          - enp216s0f3
+        mtu: 9000
