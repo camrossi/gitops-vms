@@ -45,6 +45,9 @@ endpoint_groups:
   - name: vlan-3711
     ap: vms-1
     bd: 10.1.201.0_24
+    contracts:
+      - contract: icmp
+        type: consumer
     domains:
       - type: phys
         domain: ocp_sr_iov-secondary
@@ -52,9 +55,6 @@ endpoint_groups:
   - name: vlan-3712
     ap: vms-2
     bd: 10.1.202.0_24
-    contracts:
-      - contract: icmp
-        type: consumer
     domains:
       - type: phys
         domain: ocp_sr_iov-secondary
