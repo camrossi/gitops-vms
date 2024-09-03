@@ -1,61 +1,32 @@
 apic:
   tenants:
-    - name: tf-vms-1
-      vrfs:
-        - name: vrf
+    - name: gitops-terraform-vms-1
 
       bridge_domains:
-        - name: 10.1.200.0_24
-          vrf: vrf
-          subnets:
-            - ip: 10.1.200.1/24
-
-        - name: 10.1.201.0_24
-          vrf: vrf
-          subnets:
-            - ip: 10.1.201.1/24
-
-        - name: 10.1.202.0_24
-          vrf: vrf
-          subnets:
-            - ip: 10.1.202.1/24
-
-        - name: 10.1.203.0_24
-          vrf: vrf
-          subnets:
-            - ip: 10.1.203.1/24
-
         - name: 10.1.204.0_24
-          vrf: vrf
+          vrf: default
           subnets:
             - ip: 10.1.204.1/24
+          dhcp_labels:
+            - dhcp_relay_policy: bm-01-dhcp-relay
+              scope: infra
+        - name: 10.1.205.0_24
+          vrf: default
+          subnets:
+            - ip: 10.1.205.1/24
+          dhcp_labels:
+            - dhcp_relay_policy: bm-01-dhcp-relay
+              scope: infra
+
 
       application_profiles:
         - name: vms-1
           endpoint_groups:
-            - name: vlan-3710
-              description: "br0"
-              bridge_domain: 10.1.200.0_24
-              physical_domains: ["ocp_sr_iov-secondary"]
-            - name: vlan-3711
-              description: "br0"
-              bridge_domain: 10.1.201.0_24
-              physical_domains: ["ocp_sr_iov-secondary"]
-            - name: vlan-3712
-              description: "br0"
-              bridge_domain: 10.1.202.0_24
-              physical_domains: ["ocp_sr_iov-secondary"]
+            - name: vlan-3801
+              bridge_domain: 10.1.204.0_24
+              physical_domains: ["rpis-c1"]
         - name: vms-2
           endpoint_groups:
-            - name: vlan-3713
-              description: "br0"
-              bridge_domain: 10.1.203.0_24
-              physical_domains: ["ocp_sr_iov-secondary"]
-            - name: vlan-3714
-              description: "br0"
-              bridge_domain: 10.1.204.0_24
-              physical_domains: ["ocp_sr_iov-secondary"]
-            - name: vlan-3715
-              description: "br0"
-              bridge_domain: 10.1.204.0_24
-              physical_domains: ["ocp_sr_iov-secondary"]
+            - name: vlan-3802
+              bridge_domain: 10.1.205.0_24
+              physical_domains: ["rpis-c1"]

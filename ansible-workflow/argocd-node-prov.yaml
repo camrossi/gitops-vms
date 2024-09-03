@@ -8,7 +8,7 @@ spec:
     namespace: ''
     server: 'https://api.ocp-sr-iov.cam.ciscolabs.com:6443'
   source:
-    path: workflow/k8s/Node-Provisioning
+    path: ansible-workflow/k8s/Node-Provisioning
     repoURL: 'https://github.com/camrossi/gitops-vms.git'
     targetRevision: HEAD
     directory:

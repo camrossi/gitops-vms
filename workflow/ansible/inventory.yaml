@@ -1,9 +1,0 @@
-apic:
-  hosts:
-    fab2:
-      ansible_host: fab2-apic1.cam.ciscolabs.com
-      aci_username: "terraform"
-      aci_password: "123Cisco123"
-      #aci_private_key: /home/cisco/Coding/ansible.key
-      #aci_certificate_name: ansible.crt
-      aci_validate_certs: no
