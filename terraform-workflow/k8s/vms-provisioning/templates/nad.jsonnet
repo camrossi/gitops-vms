@@ -2,10 +2,7 @@
   "apiVersion": "k8s.cni.cncf.io/v1",
   "kind": "NetworkAttachmentDefinition",
   "metadata": {
-    "name": "vlan" + $.vlan,
-    "annotations": {
-      "k8s.v1.cni.cncf.io/resourceName": "bridge.network.kubevirt.io/" + $.bridge
-    }
+    "name": "vlan" + $.vlan
   },
   spec: {
       config: std.manifestJson(
