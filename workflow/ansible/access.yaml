@@ -80,5 +80,5 @@
         ap: "{{ item.1.application_profile }}"
         epg: "{{ item.1.endpoint_group }}"
         vlan: "{{ item.1.vlan }}"
-        interface_mode: 802.1p
+        interface_mode: trunk
       loop: "{{ aaeps | subelements('aci_aep_to_epg', skip_missing=True) }}"

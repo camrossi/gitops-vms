@@ -25,14 +25,14 @@
       cisco.aci.aci_tenant:
         <<: *aci_login
         tenant: "{{ tenant_name }}"
-
-    - name: Add VRF
-      cisco.aci.aci_vrf:
-        <<: *aci_login
-        vrf: "{{ vrf_name }}"
-        tenant: "{{ tenant_name }}"
-        policy_control_preference: enforced
-        policy_control_direction: ingress
+    # Not adding a VRFs as I am using the one in Common
+    #- name: Add VRF
+    #  cisco.aci.aci_vrf:
+    #    <<: *aci_login
+    #    vrf: "{{ vrf_name }}"
+    #    tenant: "{{ tenant_name }}"
+    #    policy_control_preference: enforced
+    #    policy_control_direction: ingress
 
     - name: Add Bridge Domains
       cisco.aci.aci_bd:
