@@ -14,18 +14,19 @@ local bridge(bond, bridge, nodeSelector, trunkTags) = [n {
   trunkTags:: trunkTags,
 }];
 local trunkTags =
-  [
+  [ 
+    # ACI Infra VLAN
+    {id: 3456} +
     if range.from == range.to then { id: range.from }
     else {
       'id-range':
         {
           min: range.from,
           max: range.to,
-        },
+        }
     }
     for vlan_pool in ap.vlan_pools
     for range in vlan_pool.ranges
-
   ];
 
 

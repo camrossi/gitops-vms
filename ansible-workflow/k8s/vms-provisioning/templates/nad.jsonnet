@@ -3,9 +3,6 @@
   "kind": "NetworkAttachmentDefinition",
   "metadata": {
     "name": "vlan" + $.vlan,
-    #"annotations": {
-    #  "k8s.v1.cni.cncf.io/resourceName": "bridge.network.kubevirt.io/" + $.bridge
-    #}
   },
   spec: {
       config: std.manifestJson(
