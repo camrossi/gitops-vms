@@ -15,8 +15,6 @@ local bridge(bond, bridge, nodeSelector, trunkTags) = [n {
 }];
 local trunkTags =
   [ 
-    # ACI Infra VLAN
-    {id: 3456} +
     if range.from == range.to then { id: range.from }
     else {
       'id-range':
@@ -27,7 +25,9 @@ local trunkTags =
     }
     for vlan_pool in ap.vlan_pools
     for range in vlan_pool.ranges
-  ];
+  ] 
+  # ACI Infra VLAN
+  +  [{id: 3456}];
 
 
 bridge(std.extVar('bond'), std.extVar('bridge'), std.extVar('nodeSelector'), trunkTags)
