@@ -20,6 +20,12 @@ local vm(vlan) = [vmt {
   sshKey:: sshKey
 }];
 
+local vm2(vlan) = [vmt {
+  name:: "vm2-vlan" + vlan,
+  vlan:: vlan,
+  networkName:: "vlan" + vlan,
+  sshKey:: sshKey
+}];
 
 {
   apiVersion: 'v1',
@@ -33,6 +39,13 @@ local vm(vlan) = [vmt {
     ] + 
       [
       vm(epg.vlan)
+      for aaep in ap.aaeps
+          for epg in aaep.aci_aep_to_epg
+            if epg.application_profile == std.extVar('namespace')
+      ]
+    + 
+      [
+      vm2(epg.vlan)
       for aaep in ap.aaeps
           for epg in aaep.aci_aep_to_epg
             if epg.application_profile == std.extVar('namespace')

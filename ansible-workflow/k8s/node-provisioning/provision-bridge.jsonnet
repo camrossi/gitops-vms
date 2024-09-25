@@ -13,6 +13,7 @@ local bridge(bond, bridge, nodeSelector, trunkTags) = [n {
   nodeSelector:: nodeSelector,
   trunkTags:: trunkTags,
 }];
+
 local trunkTags =
   [ 
     if range.from == range.to then { id: range.from }
